@@ -1,0 +1,170 @@
+#VRML_SIM R2021a utf8
+WorldInfo {
+  basicTimeStep 16
+  coordinateSystem "NUE"
+  contactProperties [
+    ContactProperties {
+      material2 "dumbbell"
+      coulombFriction [
+        0
+      ]
+    }
+  ]
+}
+Viewpoint {
+  orientation -0.3332725210234395 0.9427599302692665 0.011538657173556921 0.07352265599369608
+  position 0.2709752768716602 0.16637818430973636 0.44876000405232763
+}
+TexturedBackground {
+}
+TexturedBackgroundLight {
+}
+Floor {
+  size 1 1
+}
+WoodenBox {
+  translation 0.294254 0.05 0.38327
+  size 0.1 0.1 0.1
+}
+WoodenBox {
+  translation -0.313025 0.05 0.299843
+  name "wooden box(2)"
+  size 0.1 0.1 0.1
+}
+WoodenBox {
+  translation -0.328365 0.05 -0.332267
+  name "wooden box(1)"
+  size 0.1 0.1 0.1
+}
+E-puck {
+  translation -0.03626241932758983 -3.193676434741326e-05 0.341382808263643
+  rotation -0.00019587093152138602 0.9999993840668991 0.001092474439181206 2.7846561319682297
+  controller "epuck_avoid_collision"
+}
+DEF Ball Solid {
+  translation 0 0.04958907968091059 0
+  children [
+    DEF Ball Shape {
+      appearance PBRAppearance {
+        baseColorMap ImageTexture {
+          url [
+            "textures/red_brick_wall.jpg"
+          ]
+        }
+        roughness 1
+        metalness 0
+      }
+      geometry DEF Ball_Geometry Sphere {
+        radius 0.05
+        subdivision 2
+      }
+    }
+  ]
+  boundingObject USE Ball_Geometry
+  physics Physics {
+  }
+}
+Solid {
+  translation 0.0143392 0.0480378 0.545917
+  rotation 0.9961836476421435 0.08723860340975054 0.0027506809174986926 5.4067670042451945e-05
+  children [
+    DEF Wall Shape {
+      appearance PBRAppearance {
+        baseColor 0.9 1 1
+        baseColorMap ImageTexture {
+          url [
+            "textures/varnished_wood.jpg"
+          ]
+        }
+        metalness 0
+      }
+      geometry DEF Wall_Geometry Box {
+        size 1.2 0.1 0.1
+      }
+    }
+  ]
+  name "solid(1)"
+  boundingObject USE Wall_Geometry
+}
+Solid {
+  translation 0 0.05 -0.54
+  children [
+    USE Wall
+  ]
+  name "solid(2)"
+  boundingObject USE Wall_Geometry
+}
+Solid {
+  translation -0.548297 0.0500001 0.0134177
+  rotation 0.5773502691890485 -0.5773492691885823 0.5773512691895147 2.09439
+  children [
+    USE Wall
+  ]
+  name "solid(3)"
+  boundingObject USE Wall_Geometry
+}
+Solid {
+  translation 0.548902 0.05 0.00655635
+  rotation 0 1 0 1.5708
+  children [
+    USE Wall
+  ]
+  name "solid(4)"
+  boundingObject USE Wall_Geometry
+}
+Solid {
+  translation 0.245115 0.19 -0.249047
+  rotation 0 0 1 -1.5707953071795862
+  children [
+    DEF Go Group {
+      children [
+        Transform {
+          translation 0 0.07 0
+          rotation 1 0 0 1.5708
+          children [
+            Shape {
+              appearance PBRAppearance {
+              }
+              geometry Sphere {
+                radius 0.03
+                subdivision 2
+              }
+            }
+          ]
+        }
+        Transform {
+          translation 0 -0.07 0
+          rotation 1 0 0 1.5708
+          children [
+            Shape {
+              appearance PBRAppearance {
+              }
+              geometry Sphere {
+                radius 0.03
+                subdivision 2
+              }
+            }
+          ]
+        }
+        Shape {
+          appearance PBRAppearance {
+          }
+          geometry Cylinder {
+            height 0.1
+            radius 0.01
+          }
+        }
+      ]
+    }
+  ]
+  name "solid(5)"
+  contactMaterial "dumbbell"
+  boundingObject USE Go
+  physics Physics {
+    density -1
+    mass 2
+    centerOfMass [
+      0 0.04 0
+    ]
+  }
+}
