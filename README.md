@@ -1,2 +1,0 @@
-# Cyberbotics
- STEM Coding club
